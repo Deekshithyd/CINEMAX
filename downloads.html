@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Downloads</title>
+
+    <link rel="stylesheet"
+    href="css/style.css">
+
+</head>
+
+<body class="movie-page">
+    <div class="global-back-btn"
+
+onclick="history.back()">
+
+←
+
+</div>
+
+    <h1 class="recommend-title">
+        ⬇ Downloaded Movies
+    </h1>
+
+    <div class="recommend-container"
+    id="downloadContainer">
+
+    </div>
+
+<script>
+
+fetch("http://localhost:8080/downloads/all")
+
+.then(response => response.json())
+
+.then(downloads => {
+
+    const container =
+    document.getElementById(
+    "downloadContainer"
+    );
+
+    if(downloads.length === 0){
+
+        container.innerHTML =
+        "<h2>No Downloaded Movies</h2>";
+    }
+
+    downloads.forEach(function(movie){
+
+        container.innerHTML += `
+
+        <div class="watchlist-card">
+
+            <img src="${movie.movieImage}">
+
+            <p>${movie.movieTitle}</p>
+
+            <button class="watchlist-watch-btn"
+
+            onclick="openDownloadMovie(
+            '${movie.movieTitle}',
+            '${movie.movieImage}'
+            )">
+
+                ▶ Watch
+
+            </button>
+
+            <button class="delete-btn"
+
+            onclick="removeDownloadMovie(
+            ${movie.id}
+            )">
+
+                🗑 Delete
+
+            </button>
+
+        </div>
+
+        `;
+    });
+
+});
+
+function openDownloadMovie(title, image){
+
+    localStorage.setItem(
+        "movieTitle",
+        title
+    );
+
+    localStorage.setItem(
+        "movieImage",
+        image
+    );
+
+    window.location.href =
+        "movie.html";
+}
+
+function removeDownloadMovie(id){
+
+    fetch(
+
+        "http://localhost:8080/downloads/delete/" + id,
+
+        {
+
+            method:"DELETE"
+        }
+
+    )
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        location.reload();
+    });
+}
+
+</script>
+
+</body>
+
+</html>

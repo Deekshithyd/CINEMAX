@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>CineMax</title>
+
+    <link rel="stylesheet"
+    href="css/style.css">
+
+</head>
+
+<body>
+    <div id="loader">
+
+    <h1 class="loader-logo">
+
+        CineMax
+
+    </h1>
+
+    <div class="loader-spinner">
+
+    </div>
+
+    <p>
+
+        Loading Entertainment...
+
+    </p>
+
+</div>
+
+<header class="navbar">
+
+    <h1>CineMax</h1>
+
+    <div class="search-container">
+
+        <input type="text"
+        placeholder="Search Movies..."
+        class="search-bar">
+
+        <div class="search-results">
+
+        </div>
+
+    </div>
+
+    <div class="nav-right">
+
+        <h3 id="welcomeUser">
+
+        </h3>
+
+        <div class="menu-container">
+
+            <div class="menu-icon"
+
+            onclick="toggleCategories()">
+
+                ☰
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<div class="categories-popup"
+
+id="categoriesPopup">
+
+<div id="adminMenu"
+
+onclick=
+"window.location.href='admin.html'">
+
+    ⚙ Admin
+
+</div>
+
+<p id="profileMenu"
+
+onclick=
+"window.location.href='profile.html'">
+
+    👤 User Profile
+
+</p>
+
+<p id="subscriptionMenu"
+
+onclick=
+"window.location.href='subscription.html'">
+
+    💎 Subscription
+
+</p>
+
+<p id="categoriesMenu"
+
+onclick="toggleCategoryList()">
+
+    🎬 Categories ▼
+
+</p>
+
+<div id="categoryList"
+
+style="display:none;">
+
+    <p onclick="loadCategory('All')">
+
+        All
+
+    </p>
+
+    <p onclick="loadCategory('Action')">
+
+        Action
+
+    </p>
+
+    <p onclick="loadCategory('Thriller')">
+
+        Thriller
+
+    </p>
+
+    <p onclick="loadCategory('Sci-Fi')">
+
+        Sci-Fi
+
+    </p>
+
+
+    <p onclick="loadCategory('Music')">
+
+        Music
+
+    </p>
+
+
+    <p onclick="loadCategory('Fantasy')">
+
+        Fantasy
+
+    </p>
+
+</div>
+
+<p id="watchlistMenu"
+
+onclick=
+"window.location.href='watchlist.html'">
+
+    ❤️ Watchlist
+
+</p>
+
+<p id="downloadMenu"
+
+onclick=
+"window.location.href='downloads.html'">
+
+    ⬇ Download
+
+</p>
+
+<p onclick="logoutUser()">
+
+    🚪 Logout
+
+</p>
+
+</div>
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>Welcome To CineMax</h1>
+
+        <p>
+
+            Unlimited Movies,
+            TV Shows and Entertainment
+
+        </p>
+        <button class="hero-btn"
+
+onclick=
+"window.location.href='recent.html'">
+
+    Recently Watched
+
+</button>
+
+    </div>
+
+</section>
+
+<h1 class="section-title">
+
+    Trending Now
+
+</h1>
+
+<section class="movies-container"
+
+id="moviesContainer">
+
+</section>
+
+<div class="footer">
+
+    <h2>CineMax</h2>
+
+    <p>
+
+        Unlimited Movies, TV Shows and Premium Entertainment.
+
+    </p>
+
+    <div class="footer-links">
+
+        <a href="#">Home</a>
+
+        <a href="#">Movies</a>
+
+        <a href="#">TV Shows</a>
+
+        <a href="#">Subscription</a>
+
+        <a href="#">Support</a>
+
+    </div>
+
+    <p class="copyright">
+
+        © 2026 CineMax. All Rights Reserved.
+
+    </p>
+
+</div>
+
+<script src="js/script.js"></script>
+
+<script>
+
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+    window.location.replace(
+    "login.html"
+    );
+}
+
+fetch(
+"http://localhost:8080/movies/all"
+)
+
+.then(response => response.json())
+
+.then(movies => {
+
+    const container =
+
+    document.getElementById(
+    "moviesContainer"
+    );
+
+    container.innerHTML = "";
+
+    movies.forEach(function(movie){
+
+        container.innerHTML += `
+
+        <div class="movie-card"
+
+        onclick="openMovie(
+
+        '${movie.title}',
+
+        '${movie.image}',
+
+        '${movie.info}',
+
+        '${movie.description}',
+
+        '${movie.trailer}'
+
+        )">
+
+            <img src="${movie.image}">
+
+            <div class="play-btn">
+
+                ▶
+
+            </div>
+
+            <h2>
+
+                ${movie.title}
+
+            </h2>
+
+            <p>
+
+                ${movie.info}
+
+            </p>
+
+            <button class="watch-btn">
+
+                Watch Now
+
+            </button>
+
+            <button class="watchlist-btn"
+
+            onclick="event.stopPropagation();
+
+            addToWatchlist(
+
+            '${movie.title}',
+
+            '${movie.image}'
+
+            )">
+
+                + Watchlist
+
+            </button>
+
+        </div>
+
+        `;
+    });
+
+});
+
+</script>
+<script>
+
+window.addEventListener(
+
+"load",
+
+function(){
+
+setTimeout(function(){
+
+document.getElementById(
+"loader"
+).style.opacity = "0";
+
+setTimeout(function(){
+
+document.getElementById(
+"loader"
+).style.display = "none";
+
+},500);
+
+},2500);
+
+});
+
+</script>
+<div id="toast">
+
+</div>
+</body>
+
+</html>

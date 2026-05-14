@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>User Profile</title>
+
+    <link rel="stylesheet"
+    href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="profile-page">
+
+<div class="back-btn"
+
+onclick=
+"window.location.href='index.html'">
+
+←
+
+</div>
+<button class="edit-profile-btn"
+
+onclick="editProfile()">
+
+✎ Edit
+
+</button>
+
+<div class="profile-header">
+
+<div class="profile-avatar">
+
+    <img src="images/user.png"
+
+    id="profileImage">
+
+    <label for="uploadDP"
+
+    class="camera-btn">
+
+📷
+
+    </label>
+
+    <input type="file"
+
+    id="uploadDP"
+
+    hidden>
+
+</div>
+
+<h1 id="profileName">
+
+dd
+
+</h1>
+
+<p id="profileEmail">
+
+dd@gmail.com
+
+</p>
+
+<div class="plan-badge">
+
+Movie Explorer
+
+</div>
+
+</div>
+
+<div class="profile-sections">
+
+<div class="profile-box">
+
+    <div class="profile-icon">
+
+        👑
+
+    </div>
+
+    <div>
+
+        <h2>Subscription</h2>
+
+        <p>Current Plan: Standard</p>
+
+    </div>
+
+</div>
+
+<div class="profile-box">
+
+    <div class="profile-icon">
+
+        🎟️
+
+    </div>
+
+    <div class="profile-content">
+
+        <h2>Watchlist</h2>
+
+        <p id="watchlistCount"></p>
+
+    </div>
+
+</div>
+
+<div class="profile-box">
+
+    <div class="profile-icon">
+
+        ✔
+
+    </div>
+
+    <div class="profile-content">
+
+        <h2>Account Status</h2>
+
+        <p>Verified User</p>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="logout-container">
+
+<button class="logout-btn"
+
+onclick="logoutUser()">
+
+↪ Logout
+
+</button>
+
+</div>
+
+</div>
+<script>
+
+document.getElementById(
+"uploadDP"
+).addEventListener(
+"change",
+
+function(event){
+
+const file = event.target.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+document.getElementById(
+"profileImage"
+).src = e.target.result;
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+
+</script>
+<script>
+
+function logoutUser(){
+
+    window.location.href = "login.html";
+}
+
+
+</script>
+<script>
+
+const watchlistMovies = 3;
+
+document.getElementById(
+"watchlistCount"
+).innerText =
+watchlistMovies + " Saved Movies";
+
+</script>
+</body>
+
+</html>

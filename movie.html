@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Details</title>
+
+    <link rel="stylesheet"
+    href="css/style.css">
+
+</head>
+
+<body class="movie-page">
+    <div class="global-back-btn"
+
+onclick="history.back()">
+
+←
+
+</div>
+
+    <div class="review-menu-btn"
+
+onclick="toggleReviews()">
+
+    ☰
+
+</div>
+
+<div class="movie-banner"></div>
+
+<div class="movie-details">
+
+    <img id="movieImage">
+
+    <div class="movie-content">
+
+        <h1 id="movieTitle"></h1>
+
+        <p class="movie-info"
+        id="movieInfo"></p>
+
+        <div class="genre-list">
+
+            <div class="genre">Action</div>
+
+            <div class="genre">Drama</div>
+
+            <div class="genre">Thriller</div>
+
+        </div>
+
+<p class="movie-description"
+id="movieDescription"></p>
+
+<div class="movie-buttons">
+
+    <button class="watch-btn"
+
+onclick="playTrailer()">
+
+    ▶ Watch Trailer
+
+</button>
+
+    <button class="download-btn"
+
+onclick="downloadMovie(
+localStorage.getItem('movieTitle'),
+localStorage.getItem('movieImage')
+)">
+
+    ⬇ Download
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="trailer-container"
+
+id="trailerContainer"
+
+style="display:none;">
+
+    <iframe
+id="movieTrailer"
+
+allow="autoplay"
+
+width="100%"
+
+height="500"
+
+frameborder="0"
+
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+<h2 class="recommend-title">
+    More Like This
+</h2>
+
+<div class="recommend-container">
+
+    <div class="recommend-card"
+    data-title="Kantara"
+    data-image="images/kantara.jpg"
+    data-info="8.5 | 2022 | Action / Thriller"
+    data-description="Kantara is an action thriller movie."
+    data-trailer=
+"https://www.youtube.com/embed/8mrVmf239GU">
+
+        <img src="images/kantara.jpg">
+
+        <p>Kantara</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="KGF"
+    data-image="images/kgf.jpg"
+    data-info="8.2 | 2022 | Action / Drama"
+    data-description="KGF is a gangster action drama movie."
+    data-trailer= "https://www.youtube.com/embed/qXgF-iJ_ezE">
+        <img src="images/kgf.jpg">
+
+        <p>KGF</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="MAX"
+    data-image="images/max.jpg"
+    data-info="8.0 | 2024 | Action / Crime"
+    data-description="MAX is a powerful action crime thriller."
+    data-trailer=
+"https://www.youtube.com/embed/jgUtOlged-c">
+
+        <img src="images/max.jpg">
+
+        <p>MAX</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="Bahubali"
+    data-image="images/bahubali.jpg"
+    data-info="8.0 | 2024 | Action / Fantasy"
+    data-description="Bahubali is an epic action fantasy movie."
+    data-trailer=
+"https://www.youtube.com/embed/3NQRhE772b0">
+
+        <img src="images/bahubali.jpg">
+
+        <p>Bahubali</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="They Call Him OG"
+    data-image="images/og.jpg"
+    data-info="8.4 | Gangster / Action"
+    data-description="OG is a stylish gangster action movie."
+    data-trailer=
+"https://www.youtube.com/embed/_8J8LwoVH_0">
+
+        <img src="images/og.jpg">
+
+        <p>They Call Him OG</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="Money Heist"
+    data-image="images/moneyheist.jpg"
+    data-info="8.2 | Crime / Thriller"
+    data-description="Money Heist is a thrilling robbery web series."
+    data-trailer=
+"https://www.youtube.com/embed/_InqQJRqGW4">
+
+        <img src="images/moneyheist.jpg">
+
+        <p>Money Heist</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="Stranger Things"
+    data-image="images/strangerthings.jpg"
+    data-info="8.7 | Sci-Fi / Horror"
+    data-description="Stranger Things is a sci-fi horror thriller series."
+    data-trailer=
+"https://www.youtube.com/embed/b9EkMc79ZSU">
+
+        <img src="images/strangerthings.jpg">
+
+        <p>Stranger Things</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="Wednesday"
+    data-image="images/wednesday.jpg"
+    data-info="8.1 | Mystery / Fantasy"
+    data-description="Wednesday is a mystery fantasy web series."
+    data-trailer=
+"https://www.youtube.com/embed/Di310WS8zLk">
+
+        <img src="images/wednesday.jpg">
+
+        <p>Wednesday</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+
+    <div class="recommend-card"
+    data-title="Michael Jackson"
+    data-image="images/mj.jpg"
+    data-info="9.5 | Music / Concert"
+    data-description="Michael Jackson is the King of Pop and legendary performer."
+    data-trailer=
+"https://www.youtube.com/embed/k-YAcjaLuSI">
+
+        <img src="images/mj.jpg">
+
+        <p>Michael Jackson</p>
+
+        <button class="recommend-watch-btn">
+            Watch
+        </button>
+
+    </div>
+    <div class="recommend-card"
+
+data-title="Pushpa"
+
+data-image="images/pushpa.jpg"
+
+data-info="8.3 | 2021 | Action / Drama"
+
+data-description=
+"Pushpa is an action drama movie."
+
+data-trailer=
+"https://www.youtube.com/embed/Q1NKMPhP8PY">
+
+    <img src="images/pushpa.jpg">
+
+    <p>Pushpa</p>
+
+    <button class="recommend-watch-btn">
+
+        Watch
+
+    </button>
+
+</div>
+
+</div>
+
+<div class="review-popup"
+
+id="reviewPopup">
+
+<h2>
+
+    ⭐ Ratings & Reviews
+
+</h2>
+
+<select id="rating">
+
+<option value="5">
+
+⭐⭐⭐⭐⭐
+
+</option>
+
+<option value="4">
+
+⭐⭐⭐⭐
+
+</option>
+
+<option value="3">
+
+⭐⭐⭐
+
+</option>
+
+<option value="2">
+
+⭐⭐
+
+</option>
+
+<option value="1">
+
+⭐
+
+</option>
+
+</select>
+
+<textarea
+
+id="reviewComment"
+
+placeholder="Write review...">
+
+</textarea>
+
+<button class="watch-btn"
+
+onclick="submitReview()">
+
+    Submit
+
+</button>
+
+<div id="reviewsContainer">
+
+</div>
+
+</div>
+
+<script>
+
+    document.getElementById("movieTitle")
+        .innerText =
+        localStorage.getItem("movieTitle");
+
+    document.getElementById("movieImage")
+        .src =
+        localStorage.getItem("movieImage");
+
+    document.getElementById("movieInfo")
+        .innerText =
+        localStorage.getItem("movieInfo");
+
+    document.getElementById("movieDescription")
+        .innerText =
+        localStorage.getItem("movieDescription");
+
+        const trailer =
+localStorage.getItem(
+"movieTrailer"
+);
+
+document.getElementById(
+"movieTrailer"
+).src = trailer;
+
+    document.querySelector(".movie-banner")
+        .style.backgroundImage =
+        `url(${localStorage.getItem("movieImage")})`;
+
+    const currentMovie =
+        localStorage.getItem("movieTitle");
+
+    const recommendCards =
+        document.querySelectorAll(".recommend-card");
+
+    recommendCards.forEach(function(card){
+
+        const movieName =
+            card.dataset.title;
+
+        if(
+            movieName.toLowerCase()
+            ===
+            currentMovie.toLowerCase()
+        ){
+
+            card.style.display = "none";
+        }
+
+        card.addEventListener("click", function(){
+
+            openMovie(
+
+    card.dataset.title,
+
+    card.dataset.image,
+
+    card.dataset.info,
+
+    card.dataset.description,
+
+    card.dataset.trailer
+
+);
+
+        });
+
+    });
+
+    const watchButtons =
+    document.querySelectorAll(".recommend-watch-btn");
+
+watchButtons.forEach(function(button){
+
+    button.addEventListener("click", function(event){
+
+        event.stopPropagation();
+
+        const card =
+            button.parentElement;
+
+        openMovie(
+
+    card.dataset.title,
+
+    card.dataset.image,
+
+    card.dataset.info,
+
+    card.dataset.description,
+
+    card.dataset.trailer
+
+);
+
+    });
+
+});
+
+function loadReviews(){
+
+    const movieTitle =
+
+    localStorage.getItem(
+    "movieTitle"
+    );
+
+    fetch(
+
+    "http://localhost:8080/reviews/"
+    + movieTitle
+
+    )
+
+    .then(response => response.json())
+
+    .then(reviews => {
+
+        const container =
+
+        document.getElementById(
+        "reviewsContainer"
+        );
+
+        container.innerHTML = "";
+
+        reviews.forEach(function(review){
+
+            container.innerHTML += `
+
+            <div class="review-card">
+
+                <h3>
+
+                    ${review.username}
+
+                </h3>
+
+                <p>
+
+                    Rating:
+                    ${review.rating} ⭐
+
+                </p>
+
+                <p>
+
+    ${review.comment}
+
+</p>
+
+<button class="delete-btn"
+
+onclick="deleteReview(
+${review.id}
+)">
+
+    🗑 Delete
+
+</button>
+
+            </div>
+
+            `;
+        });
+
+    });
+
+}
+
+function submitReview(){
+
+    const review = {
+
+        username:
+        localStorage.getItem(
+        "username"
+        ),
+
+        movieTitle:
+        localStorage.getItem(
+        "movieTitle"
+        ),
+
+        rating:
+        document.getElementById(
+        "rating"
+        ).value,
+
+        comment:
+        document.getElementById(
+        "reviewComment"
+        ).value
+    };
+
+    fetch(
+
+    "http://localhost:8080/reviews/add",
+
+    {
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(review)
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        loadReviews();
+
+        document.getElementById(
+        "reviewComment"
+        ).value = "";
+    });
+
+}
+function deleteReview(id){
+
+    fetch(
+
+    "http://localhost:8080/reviews/delete/"
+    + id,
+
+    {
+
+        method:"DELETE"
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        loadReviews();
+    });
+
+}
+
+function playTrailer(){
+
+    const trailerContainer =
+    document.getElementById(
+    "trailerContainer"
+    );
+
+    const trailer =
+    document.getElementById(
+    "movieTrailer"
+    );
+
+    const trailerLink =
+    localStorage.getItem(
+    "movieTrailer"
+    );
+    let continueMovies =
+
+JSON.parse(
+
+localStorage.getItem(
+"continueMovies"
+)
+
+) || [];
+
+continueMovies =
+
+continueMovies.filter(function(movie){
+
+    return movie.title !==
+
+    localStorage.getItem(
+    "movieTitle"
+    );
+});
+
+continueMovies.unshift({
+
+    title:
+    localStorage.getItem(
+    "movieTitle"
+    ),
+
+    image:
+    localStorage.getItem(
+    "movieImage"
+    )
+});
+
+localStorage.setItem(
+
+"continueMovies",
+
+JSON.stringify(continueMovies)
+
+);
+
+    trailerContainer.style.display =
+    "block";
+
+    trailer.src =
+    trailerLink + "?autoplay=1";
+
+    trailerContainer.scrollIntoView({
+
+        behavior:"smooth"
+    });
+}
+
+function toggleReviews(){
+
+    const popup =
+
+    document.getElementById(
+    "reviewPopup"
+    );
+
+    if(
+
+    popup.style.display ===
+    "block"
+
+    ){
+
+        popup.style.display =
+        "none";
+    }
+
+    else{
+
+        popup.style.display =
+        "block";
+    }
+}
+loadReviews();
+
+</script>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

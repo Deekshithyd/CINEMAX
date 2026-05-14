@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Recently Watched</title>
+
+    <link rel="stylesheet"
+    href="css/style.css">
+
+</head>
+
+<body class="movie-page">
+    <div class="global-back-btn"
+
+onclick="history.back()">
+
+←
+
+</div>
+
+
+    <h1 class="recommend-title">
+        🕒 Recently Watched
+    </h1>
+
+    <div class="recommend-container"
+    id="recentContainer">
+
+    </div>
+
+<script>
+
+const recentMovies =
+JSON.parse(
+localStorage.getItem("recentMovies")
+) || [];
+
+const container =
+document.getElementById(
+"recentContainer"
+);
+
+if(recentMovies.length === 0){
+
+    container.innerHTML =
+    "<h2>No Recently Watched Movies</h2>";
+}
+
+recentMovies.forEach(function(movie, index){
+
+    container.innerHTML += `
+
+    <div class="watchlist-card">
+
+        <img src="${movie.image}">
+
+        <p>${movie.title}</p>
+
+       <button class="watchlist-watch-btn"
+
+onclick="openRecentMovie(
+'${movie.title}',
+'${movie.image}'
+)">
+
+    ▶ Watch
+
+</button>
+
+<button class="delete-btn"
+
+onclick="deleteRecentMovie(
+${index}
+)">
+
+    🗑 Delete
+
+</button>
+
+    </div>
+
+    `;
+});
+
+function openRecentMovie(title, image){
+
+    let recentMovies =
+
+    JSON.parse(
+
+    localStorage.getItem(
+    "recentMovies"
+    )
+
+    ) || [];
+
+    recentMovies =
+
+    recentMovies.filter(function(movie){
+
+        return movie.title !== title;
+    });
+
+    recentMovies.unshift({
+
+        title:title,
+
+        image:image
+    });
+
+    localStorage.setItem(
+
+    "recentMovies",
+
+    JSON.stringify(recentMovies)
+
+    );
+
+    localStorage.setItem(
+    "movieTitle",
+    title
+    );
+
+    localStorage.setItem(
+    "movieImage",
+    image
+    );
+
+    window.location.href =
+    "movie.html";
+}
+function deleteRecentMovie(index){
+
+    recentMovies.splice(index,1);
+
+    localStorage.setItem(
+
+    "recentMovies",
+
+    JSON.stringify(recentMovies)
+
+    );
+
+    location.reload();
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>CineMax Payment</title>
+
+<style>
+
+body{
+
+    margin:0;
+    padding:0;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+.payment-page{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+    to right,
+    #000000,
+    #1a0000
+    );
+
+    padding:30px 60px;
+}
+
+.back-btn{
+
+    font-size:45px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.payment-layout{
+
+    display:flex;
+
+    gap:40px;
+
+    align-items:flex-start;
+}
+
+/* LEFT */
+
+.plan-summary{
+
+    width:30%;
+
+    background:
+    linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.9),
+    rgba(30,0,0,0.9)
+    );
+
+    border:1px solid red;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    position:sticky;
+
+    top:20px;
+
+    box-shadow:
+    0 0 25px rgba(255,0,0,0.4);
+}
+
+.plan-summary h1{
+
+    font-size:45px;
+
+    margin-bottom:15px;
+}
+
+.plan-price{
+
+    font-size:55px;
+
+    color:#ff2b2b;
+
+    margin:20px 0;
+}
+
+.plan-summary p{
+
+    color:#ccc;
+
+    font-size:20px;
+
+    margin:15px 0;
+}
+
+/* RIGHT */
+
+.payment-section{
+
+    flex:1;
+}
+
+.payment-box{
+
+    background:#0d0d0d;
+
+    border:1px solid #2a2a2a;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    margin-bottom:25px;
+
+    transition:0.3s;
+}
+
+.payment-box:hover{
+
+    border:1px solid red;
+
+    box-shadow:
+    0 0 20px rgba(255,0,0,0.3);
+}
+
+.payment-title{
+
+    font-size:32px;
+
+    margin-bottom:25px;
+}
+
+.input-box{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+    background:#1a1a1a;
+
+    border:1px solid #333;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-size:18px;
+
+    outline:none;
+}
+
+.input-box:focus{
+
+    border:1px solid red;
+}
+
+.row{
+
+    display:flex;
+
+    gap:20px;
+}
+
+.pay-btn{
+
+    width:100%;
+
+    padding:20px;
+
+    background:red;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    margin-top:20px;
+
+    box-shadow:
+    0 0 20px rgba(255,0,0,0.4);
+}
+
+.pay-btn:hover{
+
+    background:#cc0000;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 30px red;
+}
+
+.secure{
+
+    text-align:center;
+
+    color:#00ff66;
+
+    margin-top:20px;
+
+    font-size:18px;
+}
+
+.upi-apps{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.upi{
+
+    background:#1a1a1a;
+
+    padding:15px 20px;
+
+    border-radius:10px;
+
+    border:1px solid #333;
+
+    font-size:18px;
+}
+
+@media(max-width:1000px){
+
+.payment-layout{
+
+    flex-direction:column;
+}
+
+.plan-summary{
+
+    width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+    
+
+<div class="payment-page">
+
+<div class="back-btn"
+
+onclick=
+"window.location.href='subscription.html'">
+
+←
+
+</div>
+
+<div class="payment-layout">
+
+<!-- LEFT -->
+
+<div class="plan-summary">
+
+<h1 id="planName">
+
+</h1>
+
+<div class="plan-price"
+
+id="planPrice">
+
+</div>
+<p id="feature1"></p>
+
+<p id="feature2"></p>
+
+<p id="feature3"></p>
+
+<p id="feature4"></p>
+
+<p id="feature5"></p>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="payment-section">
+
+<!-- CARD -->
+
+<div class="payment-box">
+
+<div class="payment-title">
+
+Credit / Debit Card
+
+</div>
+
+<input type="text"
+
+placeholder="Card Holder Name"
+
+class="input-box">
+
+<input type="text"
+
+placeholder="Card Number"
+
+class="input-box">
+
+<div class="row">
+
+<input type="text"
+
+placeholder="MM/YY"
+
+class="input-box">
+
+<input type="password"
+
+placeholder="CVV"
+
+class="input-box">
+
+</div>
+
+</div>
+
+<!-- UPI -->
+
+<div class="payment-box">
+
+<div class="payment-title">
+
+UPI Payment
+
+</div>
+
+<div class="upi-apps">
+
+<div class="upi">
+
+PhonePe
+
+</div>
+
+<div class="upi">
+
+Google Pay
+
+</div>
+
+<div class="upi">
+
+Paytm
+
+</div>
+
+</div>
+
+<input type="text"
+
+placeholder="Enter UPI ID"
+
+class="input-box">
+
+</div>
+
+<!-- NET BANKING -->
+
+<div class="payment-box">
+
+<div class="payment-title">
+
+Net Banking
+
+</div>
+
+<select class="input-box">
+
+<option>
+
+Select Bank
+
+</option>
+
+<option>
+
+SBI
+
+</option>
+
+<option>
+
+HDFC
+
+</option>
+
+<option>
+
+ICICI
+
+</option>
+
+<option>
+
+Axis Bank
+
+</option>
+
+</select>
+
+</div>
+
+<button class="pay-btn"
+
+onclick="paymentSuccess()">
+
+Activate CineMax Premium
+
+</button>
+
+<div class="secure">
+
+✔ 100% Secure Payment
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const plan =
+
+localStorage.getItem(
+"selectedPlan"
+);
+
+const price =
+
+localStorage.getItem(
+"selectedPrice"
+);
+
+document.getElementById(
+"planName"
+).innerHTML =
+plan + " Plan";
+
+document.getElementById(
+"planPrice"
+).innerHTML =
+"₹" + price;
+
+if(plan === "Super"){
+
+document.getElementById(
+"feature1"
+).innerHTML =
+"✔ Full HD Streaming";
+
+document.getElementById(
+"feature2"
+).innerHTML =
+"✔ 2 Devices";
+
+document.getElementById(
+"feature3"
+).innerHTML =
+"✔ TV + Laptop Support";
+
+document.getElementById(
+"feature4"
+).innerHTML =
+"✔ Dolby Atmos Audio";
+
+document.getElementById(
+"feature5"
+).innerHTML =
+"✔ Ad Free Experience";
+
+}
+
+else if(plan === "Premium"){
+
+document.getElementById(
+"feature1"
+).innerHTML =
+"✔ 4K Ultra HD";
+
+document.getElementById(
+"feature2"
+).innerHTML =
+"✔ 4 Devices";
+
+document.getElementById(
+"feature3"
+).innerHTML =
+"✔ TV + Laptop Support";
+
+document.getElementById(
+"feature4"
+).innerHTML =
+"✔ Dolby Vision + Atmos";
+
+document.getElementById(
+"feature5"
+).innerHTML =
+"✔ Ultimate Premium Access";
+
+}
+
+function paymentSuccess(){
+
+    alert(
+    plan + " Plan Activated ✔"
+    );
+
+    window.location.href =
+    "subscription.html";
+}
+
+</script>
+
+</body>
+
+</html>

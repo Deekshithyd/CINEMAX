@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel</title>
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body class="admin-page">
+
+    <div class="global-back-btn"
+
+onclick="history.back()">
+
+←
+
+</div>
+
+<h1 class="admin-title">
+    CineMax Admin Panel
+</h1>
+
+<div class="admin-form">
+
+<input type="text"
+id="title"
+placeholder="Movie Title">
+
+<input type="text"
+id="image"
+placeholder="Image Path">
+
+<input type="text"
+id="info"
+placeholder="Movie Info">
+
+<input type="text"
+id="category"
+placeholder="Category">
+
+<input type="text"
+id="trailer"
+placeholder="Trailer Link">
+
+<textarea
+
+id="description"
+
+placeholder="Movie Description"></textarea>
+
+<button onclick="addMovie()">
+
+<span id="buttonText">
+
+    Add Movie
+
+</span>
+
+</button>
+
+<button
+
+onclick="clearForm()"
+
+class="clear-btn">
+
+    Clear All
+
+</button>
+
+</div>
+
+<h2 class="movie-list-title">
+
+    All Movies
+
+</h2>
+
+<input
+
+type="text"
+
+id="adminSearch"
+
+placeholder="Search Movie"
+
+onkeyup="searchMovies()"
+
+class="admin-search">
+
+<div id="adminMovieList">
+
+</div>
+
+<script>
+    const role =
+
+localStorage.getItem(
+"role"
+);
+
+if(role !== "admin"){
+
+    alert(
+    "Access Denied"
+    );
+
+    window.location.href =
+    "index.html";
+}
+
+let editingMovieId = null;
+
+function addMovie(){
+
+    const movie = {
+
+        title:
+        document.getElementById(
+        "title"
+        ).value,
+
+        image:
+        document.getElementById(
+        "image"
+        ).value,
+
+        info:
+        document.getElementById(
+        "info"
+        ).value,
+
+        category:
+        document.getElementById(
+        "category"
+        ).value,
+
+        trailer:
+        document.getElementById(
+        "trailer"
+        ).value,
+
+        description:
+        document.getElementById(
+        "description"
+        ).value
+    };
+
+    fetch(
+
+editingMovieId === null
+
+?
+
+"http://localhost:8080/movies/add"
+
+:
+
+"http://localhost:8080/movies/update/"
++ editingMovieId,
+
+{
+
+    method:
+
+    editingMovieId === null
+
+    ?
+
+    "POST"
+
+    :
+
+    "PUT",
+
+        headers:{
+            "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify(movie)
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        alert(data);
+
+        loadMovies();
+
+        document.getElementById(
+"title"
+).value = "";
+
+document.getElementById(
+"image"
+).value = "";
+
+document.getElementById(
+"info"
+).value = "";
+
+document.getElementById(
+"category"
+).value = "";
+
+document.getElementById(
+"trailer"
+).value = "";
+
+document.getElementById(
+"description"
+).value = "";
+
+editingMovieId = null;
+
+document.getElementById(
+"buttonText"
+).innerText =
+
+"Add Movie";
+
+    });
+
+}
+
+function loadMovies(){
+
+    fetch(
+    "http://localhost:8080/movies/all"
+    )
+
+    .then(response => response.json())
+
+    .then(movies => {
+
+        const container =
+        document.getElementById(
+        "adminMovieList"
+        );
+
+        container.innerHTML = "";
+
+        movies.forEach(function(movie){
+
+            container.innerHTML += `
+
+            <div class="admin-movie-card">
+
+                <span>
+
+                    ${movie.title}
+
+                </span>
+
+                <div>
+
+<button
+
+onclick="editMovie(
+
+${movie.id},
+
+'${movie.title}',
+
+'${movie.image}',
+
+'${movie.info}',
+
+'${movie.category}',
+
+'${movie.trailer}',
+
+'${movie.description}'
+
+)">
+
+Edit
+
+</button>
+
+<button
+
+onclick="deleteMovie(
+${movie.id}
+)">
+
+Delete
+
+</button>
+
+</div>
+
+            </div>
+
+            `;
+        });
+
+    });
+
+}
+function deleteMovie(id){
+
+    fetch(
+
+    "http://localhost:8080/movies/delete/"
+    + id,
+
+    {
+
+        method:"DELETE"
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        alert(data);
+
+        loadMovies();
+
+    });
+
+}
+function editMovie(
+
+id,
+title,
+image,
+info,
+category,
+trailer,
+description
+
+){
+
+    editingMovieId = id;
+
+    document.getElementById(
+    "title"
+    ).value = title;
+
+    document.getElementById(
+    "image"
+    ).value = image;
+
+    document.getElementById(
+    "info"
+    ).value = info;
+
+    document.getElementById(
+    "category"
+    ).value = category;
+
+    document.getElementById(
+    "trailer"
+    ).value = trailer;
+
+    document.getElementById(
+    "description"
+    ).value = description;
+
+    document.getElementById(
+    "buttonText"
+    ).innerText =
+
+    "Update Movie";
+}
+
+loadMovies();
+
+function searchMovies(){
+
+    const searchText =
+
+    document.getElementById(
+    "adminSearch"
+    ).value.toLowerCase();
+
+    const cards =
+
+    document.querySelectorAll(
+    ".admin-movie-card"
+    );
+
+    cards.forEach(function(card){
+
+        const title =
+
+card.querySelector(
+"span"
+).innerText.toLowerCase();
+
+        if(title.includes(searchText)){
+
+            card.style.display = "flex";
+        }
+
+        else{
+
+            card.style.display = "none";
+        }
+
+    });
+
+}
+function clearForm(){
+
+    document.getElementById(
+    "title"
+    ).value = "";
+
+    document.getElementById(
+    "image"
+    ).value = "";
+
+    document.getElementById(
+    "info"
+    ).value = "";
+
+    document.getElementById(
+    "category"
+    ).value = "";
+
+    document.getElementById(
+    "trailer"
+    ).value = "";
+
+    document.getElementById(
+    "description"
+    ).value = "";
+
+    editingMovieId = null;
+
+    document.getElementById(
+    "buttonText"
+    ).innerText =
+
+    "Add Movie";
+}
+
+</script>
+
+</body>
+
+</html>
