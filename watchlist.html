@@ -36,7 +36,7 @@ id="watchlistContainer">
 
 <script>
 
-fetch("http://localhost:8080/watchlist/all")
+fetch("https://cinemax-1-5ql6.onrender.com/watchlist/all")
 
 .then(response => response.json())
 
@@ -111,7 +111,7 @@ function removeWatchlistMovie(id){
 
     fetch(
 
-        "http://localhost:8080/watchlist/delete/" + id,
+        "https://cinemax-1-5ql6.onrender.com/watchlist/delete/" + id,
 
         {
 

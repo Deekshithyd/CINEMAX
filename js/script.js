@@ -16,7 +16,7 @@ if(registerForm){
 
         try{
 
-            const response = await fetch("http://localhost:8080/user/register", {
+            const response = await fetch("https://cinemax-1-5ql6.onrender.com/user/register", {
 
                 method: "POST",
 
@@ -64,7 +64,7 @@ if(loginForm){
 
         try{
 
-            const response = await fetch("http://localhost:8080/user/login", {
+            const response = await fetch("https://cinemax-1-5ql6.onrender.com/user/login", {
 
                 method: "POST",
 
@@ -196,7 +196,7 @@ if(searchBar){
         }
 
         fetch(
-        "http://localhost:8080/movies/search/"
+        "https://cinemax-1-5ql6.onrender.com/movies/search/"
         + movieName
         )
 
@@ -322,7 +322,7 @@ function downloadMovie(title, image){
 
     fetch(
 
-        "http://localhost:8080/downloads/add",
+        "https://cinemax-1-5ql6.onrender.com/downloads/add",
 
         {
 
@@ -362,7 +362,7 @@ function addToWatchlist(title, image){
 
     fetch(
 
-        "http://localhost:8080/watchlist/add",
+        "https://cinemax-1-5ql6.onrender.com/watchlist/add",
 
         {
 
@@ -420,12 +420,12 @@ function loadCategory(category){
     container.innerHTML = "";
 
     let url =
-    "http://localhost:8080/movies/all";
+    "https://cinemax-1-5ql6.onrender.com/movies/all";
 
     if(category !== "All"){
 
         url =
-        "http://localhost:8080/movies/category/"
+        "https://cinemax-1-5ql6.onrender.com/movies/category/"
         + category;
     }
 

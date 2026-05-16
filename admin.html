@@ -162,11 +162,11 @@ editingMovieId === null
 
 ?
 
-"http://localhost:8080/movies/add"
+"https://cinemax-1-5ql6.onrender.com/movies/add"
 
 :
 
-"http://localhost:8080/movies/update/"
+"https://cinemax-1-5ql6.onrender.com/movies/update/"
 + editingMovieId,
 
 {
@@ -238,7 +238,7 @@ document.getElementById(
 function loadMovies(){
 
     fetch(
-    "http://localhost:8080/movies/all"
+    "https://cinemax-1-5ql6.onrender.com/movies/all"
     )
 
     .then(response => response.json())
@@ -314,7 +314,7 @@ function deleteMovie(id){
 
     fetch(
 
-    "http://localhost:8080/movies/delete/"
+    "https://cinemax-1-5ql6.onrender.com/movies/delete/"
     + id,
 
     {
