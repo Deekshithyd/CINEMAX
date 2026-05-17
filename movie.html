@@ -373,9 +373,12 @@ onclick="submitReview()">
         .innerText =
         localStorage.getItem("movieTitle");
 
-    document.getElementById("movieImage")
-        .src =
-        localStorage.getItem("movieImage");
+    const movieImg =
+"https://deekshithyd.github.io/CINEMAX/images/"
++ localStorage.getItem("movieImage");
+
+document.getElementById("movieImage")
+    .src = movieImg;
 
     document.getElementById("movieInfo")
         .innerText =
@@ -386,17 +389,16 @@ onclick="submitReview()">
         localStorage.getItem("movieDescription");
 
         const trailer =
-localStorage.getItem(
-"movieTrailer"
-);
+localStorage.getItem("movieTrailer");
 
-document.getElementById(
-"movieTrailer"
-).src = trailer;
+if(trailer && trailer !== "null"){
+    document.getElementById("movieTrailer").src =
+    trailer;
+}
 
     document.querySelector(".movie-banner")
-        .style.backgroundImage =
-        `url(${localStorage.getItem("movieImage")})`;
+    .style.backgroundImage =
+    `url(${movieImg})`;
 
     const currentMovie =
         localStorage.getItem("movieTitle");
