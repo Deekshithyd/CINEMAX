@@ -631,57 +631,70 @@ function playTrailer(){
     localStorage.getItem(
     "movieTrailer"
     );
+
+    if(
+        !trailerLink ||
+        trailerLink==="null"
+    ){
+
+        alert(
+        "Trailer not available"
+        );
+
+        return;
+    }
+
     let continueMovies =
 
-JSON.parse(
-
-localStorage.getItem(
-"continueMovies"
-)
-
-) || [];
-
-continueMovies =
-
-continueMovies.filter(function(movie){
-
-    return movie.title !==
-
+    JSON.parse(
     localStorage.getItem(
-    "movieTitle"
-    );
-});
-
-continueMovies.unshift({
-
-    title:
-    localStorage.getItem(
-    "movieTitle"
-    ),
-
-    image:
-    localStorage.getItem(
-    "movieImage"
+    "continueMovies"
     )
-});
+    ) || [];
 
-localStorage.setItem(
+    continueMovies =
+    continueMovies.filter(function(movie){
 
-"continueMovies",
+        return movie.title !==
+        localStorage.getItem(
+        "movieTitle"
+        );
 
-JSON.stringify(continueMovies)
+    });
 
-);
+    continueMovies.unshift({
+
+        title:
+        localStorage.getItem(
+        "movieTitle"
+        ),
+
+        image:
+        localStorage.getItem(
+        "movieImage"
+        )
+
+    });
+
+    localStorage.setItem(
+
+        "continueMovies",
+
+        JSON.stringify(
+        continueMovies
+        )
+    );
 
     trailerContainer.style.display =
     "block";
 
     trailer.src =
-    trailerLink + "?autoplay=1";
+    trailerLink + "&autoplay=1";
 
     trailerContainer.scrollIntoView({
 
         behavior:"smooth"
+
     });
 }
 
