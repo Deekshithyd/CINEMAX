@@ -449,7 +449,7 @@ function loadCategory(category){
 '${movie.trailer}'
 )">
 
-                <img src="${movie.image}">
+                <img src="images/${movie.image}">
 
                 <div class="play-btn">
                     ▶
